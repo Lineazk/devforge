@@ -124,17 +124,30 @@ const SAMPLE_JWT = `eyJhbGciOiJIUzI1NiIsInR5cCI6IkpXVCIsImtpZCI6InByb2QtYXV0aC1r
 document.addEventListener('DOMContentLoaded', () => {
   // Theme Setup
   const themeToggle = document.getElementById('theme-toggle');
+  const sunIcon = document.getElementById('theme-icon-sun');
+  const moonIcon = document.getElementById('theme-icon-moon');
   const savedTheme = localStorage.getItem('devforge_theme') || 'dark';
-  if (savedTheme === 'light') {
-    document.documentElement.classList.remove('dark');
-  } else {
-    document.documentElement.classList.add('dark');
+
+  function applyTheme(isDark) {
+    if (isDark) {
+      document.documentElement.classList.add('dark');
+      sunIcon?.classList.remove('hidden');
+      moonIcon?.classList.add('hidden');
+    } else {
+      document.documentElement.classList.remove('dark');
+      sunIcon?.classList.add('hidden');
+      moonIcon?.classList.remove('hidden');
+    }
   }
 
+  applyTheme(savedTheme === 'dark');
+
   themeToggle?.addEventListener('click', () => {
-    const isDark = document.documentElement.classList.toggle('dark');
-    localStorage.setItem('devforge_theme', isDark ? 'dark' : 'light');
-    showToast(isDark ? 'Dark mode enabled' : 'Light mode enabled', 'info');
+    const isCurrentlyDark = document.documentElement.classList.contains('dark');
+    const newDark = !isCurrentlyDark;
+    applyTheme(newDark);
+    localStorage.setItem('devforge_theme', newDark ? 'dark' : 'light');
+    showToast(newDark ? 'Dark mode enabled' : 'Light mode enabled', 'info');
   });
 
   // Modal Setup
