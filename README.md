@@ -72,7 +72,7 @@ Created by me with AI-assisted development.
 - **Public DID**: `did:key:z6MkgVJ4NDcTqg5zrYahDYpBsrskw48AxbvM5NqstqroLoud`
 - **Community contribution**: `@flop_labs`
 
-> *Disclaimer: This project is an independent community contribution and is not an official Flop Labs or Technocore project.*
+> *Disclaimer: This project is an independent community contribution for @flop_labs and is not an official Flop Labs project.*
 
 ---
 
