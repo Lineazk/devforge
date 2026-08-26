@@ -180,13 +180,14 @@ export function explainCron(cronStr) {
   if (mon !== '*') expl += `, in ${describeField(mon, 'month', months)}`;
   if (dow !== '*') expl += `, on ${describeField(dow, 'day-of-week', daysOfWeek)}`;
 
-  // Calculate next 5 occurrences
+  // Calculate next 5 occurrences (search up to 60 days ahead)
   const nextDates = [];
   try {
     let current = new Date();
     current.setSeconds(0, 0);
 
-    for (let attempts = 0; attempts < 5000 && nextDates.length < 5; attempts++) {
+    const maxAttempts = 60 * 24 * 60; // 60 days in minutes
+    for (let attempts = 0; attempts < maxAttempts && nextDates.length < 5; attempts++) {
       current = new Date(current.getTime() + 60000); // add 1 minute
 
       const m = current.getMinutes();
